@@ -328,10 +328,21 @@ export default () => {
             />
             <Form
                 onSubmit={_ => {
-                    axios.post(conf.url + "/api/animals/generate", {
-                        count: number,
-                        add: true
-                    });
+                    axios
+                        .post(conf.url + "/api/animals/generate", {
+                            count: number,
+                            add: true
+                        })
+                        .then(response => {
+                            response.data.data != (number ? number : 1)
+                                ? alert(
+                                      "Не вставилось " +
+                                          ((number ? number : 1) -
+                                              response.data.data) +
+                                          " записей."
+                                  )
+                                : undefined;
+                        });
                 }}
             >
                 <Form.Row className="justify-content-center mt-2">
