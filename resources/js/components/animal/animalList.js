@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 
 import Paginator from "../helpers/paginator.js";
+import conf from "../helpers/constants.js";
 import AnimalForm from "./animalForm";
 
 export default () => {
@@ -63,7 +64,7 @@ export default () => {
     useEffect(() => {
         setPage(~~sessionStorage.page > 0 ? ~~sessionStorage.page : 1);
         axios
-            .get("http://localhost:8001/api/animals/list/" + page, {
+            .get(conf.url + "/api/animals/list/" + page, {
                 params: {
                     filterType: filters["type"],
                     filterSex: filters["sex"],
@@ -274,7 +275,8 @@ export default () => {
                                     onClick={_ =>
                                         axios
                                             .delete(
-                                                "http://localhost:8001/api/animals" +
+                                                conf.url +
+                                                    "/api/animals" +
                                                     animal["animal_id"]
                                             )
                                             .then(response =>
@@ -326,7 +328,7 @@ export default () => {
             />
             <Form
                 onSubmit={_ => {
-                    axios.post("http://localhost:8001/api/animals/generate", {
+                    axios.post(conf.url + "/api/animals/generate", {
                         count: number,
                         add: true
                     });

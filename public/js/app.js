@@ -85165,6 +85165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _helpers_formErrors_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/formErrors.js */ "./resources/js/components/helpers/formErrors.js");
+/* harmony import */ var _helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/constants.js */ "./resources/js/components/helpers/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -85182,6 +85183,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -85248,7 +85250,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
     onSubmit: function onSubmit(_) {
-      return ((inData === null || inData === void 0 ? void 0 : inData.animal_id) ? axios__WEBPACK_IMPORTED_MODULE_2___default.a.put("http://localhost:8001/api/animals/" + (inData === null || inData === void 0 ? void 0 : inData.animal_id), _objectSpread({}, data)) : axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("http://localhost:8001/api/animals/", _objectSpread({}, data))).then(function (response) {
+      return ((inData === null || inData === void 0 ? void 0 : inData.animal_id) ? axios__WEBPACK_IMPORTED_MODULE_2___default.a.put(_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals" + (inData === null || inData === void 0 ? void 0 : inData.animal_id), _objectSpread({}, data)) : axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals", _objectSpread({}, data))).then(function (response) {
         return response.data.success ? undefined : alert(response.data.message);
       });
     }
@@ -85502,7 +85504,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     type: "button",
     value: "\u0421\u0433\u0435\u043D\u0435\u0440\u0438\u0440\u043E\u0432\u0430\u0442\u044C",
     onClick: function onClick(_) {
-      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("http://localhost:8001/api/animals/generate", {
+      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals/generate", {
         count: 1,
         add: false
       }).then(function (response) {
@@ -85529,7 +85531,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _helpers_paginator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/paginator.js */ "./resources/js/components/helpers/paginator.js");
-/* harmony import */ var _animalForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./animalForm */ "./resources/js/components/animal/animalForm.js");
+/* harmony import */ var _helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../helpers/constants.js */ "./resources/js/components/helpers/constants.js");
+/* harmony import */ var _animalForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./animalForm */ "./resources/js/components/animal/animalForm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -85547,6 +85550,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -85636,7 +85640,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   };
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setPage(~~sessionStorage.page > 0 ? ~~sessionStorage.page : 1);
-    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("http://localhost:8001/api/animals/list/" + page, {
+    axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals/list/" + page, {
       params: {
         filterType: filters["type"],
         filterSex: filters["sex"],
@@ -85664,7 +85668,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       return setShowDialog(false);
     },
     size: "lg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_animalForm__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_animalForm__WEBPACK_IMPORTED_MODULE_5__["default"], {
     inData: inData
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Row"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Group, {
     as: react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Col"],
@@ -85675,12 +85679,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       setFilters(_objectSpread(_objectSpread({}, filters), {}, {
         type: event.target.value
       }));
-      console.log(filters);
       changePage(1);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-    value: null
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "cat"
   }, translations["type"]["cat"]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "dog"
@@ -85781,7 +85782,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
       variant: "outline-dark",
       onClick: function onClick(_) {
-        return axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("http://localhost:8001/api/animals/" + animal["animal_id"]).then(function (response) {
+        return axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"](_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals" + animal["animal_id"]).then(function (response) {
           return response.data.success ? setLoading(true) : console.log(response.data);
         });
       }
@@ -85810,7 +85811,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     callback: changePage
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
     onSubmit: function onSubmit(_) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("http://localhost:8001/api/animals/generate/", {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post(_helpers_constants_js__WEBPACK_IMPORTED_MODULE_4__["default"].url + "/api/animals/generate", {
         count: number,
         add: true
       });
@@ -85872,6 +85873,25 @@ var App = function App() {
 };
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("app"));
+
+/***/ }),
+
+/***/ "./resources/js/components/helpers/constants.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/helpers/constants.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var prod = {
+  url: "http://localhost:8080"
+};
+var dev = {
+  url: "http://localhost:8000"
+};
+/* harmony default export */ __webpack_exports__["default"] = ( true ? dev : undefined);
 
 /***/ }),
 

@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
 
 import FormErrors from "../helpers/formErrors.js";
+import conf from "../helpers/constants.js";
 
 export default ({ inData = {} }) => {
     const [data, setData] = useState(inData);
@@ -74,13 +75,12 @@ export default ({ inData = {} }) => {
                 onSubmit={_ =>
                     (inData?.animal_id
                         ? axios.put(
-                              "http://localhost:8001/api/animals" +
-                                  inData?.animal_id,
+                              conf.url + "/api/animals" + inData?.animal_id,
                               {
                                   ...data
                               }
                           )
-                        : axios.post("http://localhost:8001/api/animals", {
+                        : axios.post(conf.url + "/api/animals", {
                               ...data
                           })
                     ).then(response =>
@@ -372,13 +372,10 @@ export default ({ inData = {} }) => {
                             value="Сгенерировать"
                             onClick={_ =>
                                 axios
-                                    .post(
-                                        "http://localhost:8001/api/animals/generate",
-                                        {
-                                            count: 1,
-                                            add: false
-                                        }
-                                    )
+                                    .post(conf.url + "/api/animals/generate", {
+                                        count: 1,
+                                        add: false
+                                    })
                                     .then(response =>
                                         setGenData(response.data.data)
                                     )
