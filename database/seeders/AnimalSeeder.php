@@ -14,7 +14,7 @@ class AnimalSeeder extends Seeder
     public function run()
     {
         $model = new \App\Models\Animal();
-        if (config("app.env") === "dev") {
+        if (config("app.env") !== "testing") {
             foreach(range(1, 1000) as $i) {
                 while (!$model->createRecord()) {
                 }

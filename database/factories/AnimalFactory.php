@@ -30,7 +30,7 @@ class AnimalFactory extends Factory
      */
     public function definition()
     {
-        if (config('app.env') === 'dev') {
+        if (config('app.env') !== 'testing') {
             $sexes = ['female', 'male'];
             $types = ['cat', 'dog', 'bird'];
             $sex = array_rand($sexes);
