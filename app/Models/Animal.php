@@ -114,9 +114,11 @@ class Animal extends Model
     public function generate($count = null) {
         $count = (int) $count;
         if ($count > 1) {
-            return $this->factory()->count($count)->make();
+            return array_map(function ($x) {
+                return $this->factory()->makeOne();
+            }, range(1, $count));
         } else {
-            return $this->factory()->make();
+            return $this->factory()->makeOne();
         }
     }
 }
