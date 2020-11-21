@@ -57,6 +57,16 @@ class AnimalFactory extends Factory
             $animal['birth_day'] = date('Y-m-d', time() - rand());
             $animal['sex'] = $sexes[$sex];
             return $animal;
+        } else {
+            return [
+                'name' => $this->faker->word . ' ' . $this->faker->firstName . ' ' . $this->faker->lastName,
+                'owner' => $this->faker->firstName . ' ' . $this->faker->lastName,
+                'country' => $this->faker->country,
+                'type' => $this->faker->randomElement(['cat', 'dog', 'bird']),
+                'sex' => $this->faker->randomElement(["female", "male"]),
+                'birth_day' => $this->faker->date,
+                'weight' => $this->faker->randomFloat,
+            ];
         }
     }
 }
