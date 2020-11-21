@@ -276,7 +276,7 @@ export default () => {
                                         axios
                                             .delete(
                                                 conf.url +
-                                                    "/api/animals" +
+                                                    "/api/animals/" +
                                                     animal["animal_id"]
                                             )
                                             .then(response =>
