@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,10 +15,11 @@ class AnimalController extends Controller
         $this->animalModel = new Animal();        
     }
 
-    public function list(Request $request, $page = 1)
+    public function list($page = 1)
     {
         try {
-            $options = $request->toArray();
+            $options = request();
+            $this->authorize('list');
             $perPage = 20;
             $validated = Validator::make($options, [
                 'filterType' => ['nullable', Rule::in(["cat", "dog", "bird"])],
@@ -47,9 +46,9 @@ class AnimalController extends Controller
             ]);
         }
     }
-    public function form(Request $request, $id = null) {
+    public function form($id = null) {
         try {
-            $json = $request->json()->all();
+            $json = request()->json()->all();
             unset($json["animal_id"]);
             $data = $this->animalModel->newInstance()->fill($json);
             $res = $id
@@ -89,9 +88,9 @@ class AnimalController extends Controller
             ]);
         }
     }
-    public function generate(Request $request) {
+    public function generate() {
         try {
-            $json = $request->json()->all();
+            $json = request()->json()->all();
             $cnt = $json["count"];
             $isAdd = $json["add"];
             $data = $this->animalModel->generate($cnt);

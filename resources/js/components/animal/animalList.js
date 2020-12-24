@@ -62,10 +62,11 @@ export default () => {
     };
 
     useEffect(() => {
-        setPage(~~sessionStorage.page > 0 ? ~~sessionStorage.page : 1);
+        const _page = ~~sessionStorage.page > 0 ? ~~sessionStorage.page : 1;
         axios
-            .get(conf.url + "/api/animals/list/" + page, {
+            .get(conf.url + "/api/animals", {
                 params: {
+                    page: _page,
                     filterType: filters["type"],
                     filterSex: filters["sex"],
                     filterCountry: filters["country"],
@@ -77,14 +78,13 @@ export default () => {
             })
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data);
                     setList(response.data.data);
-                    setLoading(false);
                     setPageCount(response.data.pages);
                 } else {
                     setList([]);
-                    setLoading(false);
                 }
+                setPage(_page);
+                setLoading(false);
             });
     }, [page, filters, sort, loading]);
 
@@ -276,7 +276,7 @@ export default () => {
                                         axios
                                             .delete(
                                                 conf.url +
-                                                    "/api/animals" +
+                                                    "/api/animals/" +
                                                     animal["animal_id"]
                                             )
                                             .then(response =>

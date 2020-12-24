@@ -15,7 +15,12 @@ class AnimalSeeder extends Seeder
     {
         $model = new \App\Models\Animal();
         foreach(range(1, (config("app.env") !== "testing" ? 1000 : 100000)) as $i) {
-            while (!$model->createRecord()) {
+            $res = True;
+            while($res) {
+                try {
+                    $res = !$model->createRecord();
+                } catch (\Exception $e) {
+                }
             }
         }
     }

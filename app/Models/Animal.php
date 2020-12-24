@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 
 class Animal extends Model
@@ -30,9 +28,9 @@ class Animal extends Model
         $this->attributes['sex'] = \array_search($sex, $this->sexes);
     }
 
-    public function createRecord($data = null) {
+    public static function createRecord($data = null) {
         if (!$data) {
-            $data = $this->generate();
+            $data = self::generate();
         }
         try {
             $data = $data->attributes;
@@ -49,16 +47,23 @@ class Animal extends Model
                 'owner' => ['required', 'regex:/^[a-zA-Zа-яА-ЯёЁ]+ [a-zA-Zа-яА-ЯёЁ]+$/u'],
                 'weight' => ['required', 'gt:0'],
             ])->validate(); 
-            return $this->query()->insert($data);
-        } catch(ValidationException $e) {
-            return false;
+            return self::query()->insert($data);
         } catch(QueryException $e) {
             return false;
         }
     }
 
-    public function getList($page, $perPage, $options = null) {
-        $builder = $this->query();
+    public static function getList($page, $perPage, $options = null) {
+        $options = Validator::make($options, [
+                'filterType' => ['nullable', Rule::in(["cat", "dog", "bird"])],
+                'filterSex' => ['nullable', Rule::in(["female", "male"])],
+                'filterFDate' => ['nullable', 'date'],
+                'filterLDate' => ['nullable', 'date'],
+                'filterCountry' => ['nullable'],
+                'sortField' => ['nullable', Rule::in(["birth_day", "weight"])],
+                'sortDir' => ['required_with:sortField', Rule::in(["asc", "desc"])],
+            ])->validated();
+        $builder = self::query();
         if (isset($options['filterType']) && $options['filterType'] !== null) {
             $builder->where('type', '=', $options['filterType']);
         }
@@ -78,14 +83,15 @@ class Animal extends Model
             $builder->orderBy($options['sortField'], $options['sortDir']);
         }
         return [
-            "totalPages"    => ceil($builder->count() / $perPage),
+            "pages"    => ceil($builder->count() / $perPage),
             "data"          => $builder->offset(($page - 1) * $perPage)->limit($perPage)->select()->get()->toArray()
         ];
     }
 
-    public function updateRecord($id, $data) {
+    public static function updateRecord($id, $data) {
         try {
             $data = $data->attributes;
+            unset($data["animal_id"]);
             Validator::make($data, [
                 'name' => [
                     'required',
@@ -99,26 +105,24 @@ class Animal extends Model
                 'owner' => ['required', 'regex:/^[a-zA-Zа-яА-ЯёЁ]+ [a-zA-Zа-яА-ЯёЁ]+$/u'],
                 'weight' => ['required', 'gt:0'],
             ])->validate(); 
-            return $this->query()->where("animal_id", "=", $id)->update($data);
-        } catch(ValidationException $e) {
-            return false;
+            return self::query()->where("animal_id", "=", $id)->update($data);
         } catch(QueryException $e) {
             return false;
         }
     }
 
-    public function deleteRecord($id) {
-        return $this->query()->where("animal_id", "=", $id)->delete();
+    public static function deleteRecord($id) {
+        return self::query()->where("animal_id", "=", $id)->delete();
     }
 
-    public function generate($count = null) {
+    public static function generate($count = null) {
         $count = (int) $count;
         if ($count > 1) {
             return array_map(function ($x) {
-                return $this->factory()->makeOne();
+                return self::factory()->makeOne();
             }, range(1, $count));
         } else {
-            return $this->factory()->makeOne();
+            return self::factory()->makeOne();
         }
     }
 }
