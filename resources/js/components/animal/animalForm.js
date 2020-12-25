@@ -75,7 +75,7 @@ export default ({ inData = {} }) => {
                 onSubmit={_ =>
                     (inData?.animal_id
                         ? axios.put(
-                              conf.url + "/api/animals" + inData?.animal_id,
+                              conf.url + "/api/animals/" + inData?.animal_id,
                               {
                                   ...data
                               }
